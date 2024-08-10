@@ -1,3 +1,3 @@
-module monkey-interpreter-go
+module monkey
 
 go 1.22.4
