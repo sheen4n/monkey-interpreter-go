@@ -12,7 +12,8 @@
         "golang.go",
         "rangav.vscode-thunder-client",
         "ms-azuretools.vscode-docker",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "vscodevim.vim"
       ],
       "settings": {
         "go.toolsManagement.checkForUpdates": "local",
