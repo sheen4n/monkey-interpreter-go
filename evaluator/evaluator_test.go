@@ -302,3 +302,35 @@ func TestFunctionApplication(t *testing.T) {
 		testIntegerObject(t, testEval(tt.input), tt.expected)
 	}
 }
+
+func TestClosures(t *testing.T) {
+	input := `
+	let newAdder = fn(x) {
+		fn(y) { x + y };
+	};
+	
+	let addTwo = newAdder(2);
+	addTwo(3);
+	`
+	testIntegerObject(t, testEval(input), 5)
+}
+
+func TestAcceptFunctionAsArgument(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected int64
+	}{
+		{`
+			let add = fn(a,b) {a + b};
+			let applyFunc = fn(a,b,f) {f(a,b)};
+			applyFunc(2,4,add);`, 6},
+		{`
+			let sub = fn(a,b) {a - b};
+			let applyFunc = fn(a,b,f) {f(a,b)};
+			applyFunc(4,4,sub);`, 0},
+	}
+
+	for _, tt := range tests {
+		testIntegerObject(t, testEval(tt.input), tt.expected)
+	}
+}

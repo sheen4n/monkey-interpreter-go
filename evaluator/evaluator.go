@@ -17,6 +17,9 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 	case *ast.Program:
 		return evalProgram(node.Statements, env)
 
+	case *ast.BlockStatement:
+		return evalBlockStatement(node.Statements, env)
+
 	case *ast.ExpressionStatement:
 		return Eval(node.Expression, env)
 
@@ -45,9 +48,6 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 
 	case *ast.Boolean:
 		return nativeBoolToBooleanObject(node.Value)
-
-	case *ast.BlockStatement:
-		return evalBlockStatement(node.Statements, env)
 
 	case *ast.IfExpression:
 		return evalIfExpression(node, env)
