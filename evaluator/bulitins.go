@@ -17,4 +17,25 @@ var builtins = map[string]*object.Builtin{
 			default:
 				return newError("argument to `len` not supported, got %s", args[0].Type())
 			}
-		}}}
+		}},
+
+	"first": {
+		Fn: func(args ...object.Object) object.Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+
+			switch arg := args[0].(type) {
+			case *object.Array:
+				elements := arg.Elements
+				if len(elements) == 0 {
+					return NULL
+				}
+				return elements[0]
+
+			default:
+				return newError("argument to `first` must be ARRAY, got %s", args[0].Type())
+			}
+		},
+	},
+}
