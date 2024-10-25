@@ -20,3 +20,22 @@ func TestStringHashKey(t *testing.T) {
 		t.Errorf("hello1.HashKey() equal to diff1.HashKey()")
 	}
 }
+
+func TestBooleanHashKey(t *testing.T) {
+	true1 := &Boolean{Value: true}
+	true2 := &Boolean{Value: true}
+	false1 := &Boolean{Value: false}
+	false2 := &Boolean{Value: false}
+
+	if true1.HashKey() != true2.HashKey() {
+		t.Errorf("true1.HashKey() not equal to true2.HashKey()")
+	}
+
+	if false1.HashKey() != false2.HashKey() {
+		t.Errorf("false1.HashKey() not equal to false2.HashKey()")
+	}
+
+	if true1.HashKey() == false1.HashKey() {
+		t.Errorf("true1.HashKey() equal to false1.HashKey()")
+	}
+}

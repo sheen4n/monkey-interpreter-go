@@ -118,3 +118,12 @@ func (s *String) HashKey() HashKey {
 	h.Write([]byte(s.Value))
 	return HashKey{Type: s.Type(), Value: h.Sum64()}
 }
+
+func (b *Boolean) HashKey() HashKey {
+	var value uint64 = 0
+
+	if b.Value {
+		value = 1
+	}
+	return HashKey{Type: b.Type(), Value: value}
+}
