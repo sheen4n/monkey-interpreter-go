@@ -60,6 +60,7 @@ To execute a Monkey source file:
 
 ```bash
 ./monkey ./examples/fibonacci.monkey
+./monkey ./examples/map.monkey
 ```
 
 ## Language Features
@@ -151,7 +152,11 @@ let map = fn(arr, f) {
         if (len(arr) == 0) {
             return accumulated;
         } else {
-            return iter(rest(arr), push(accumulated, f(first(arr))));
+            return iter(rest(arr), 
+              push(accumulated, 
+                f(first(arr))
+              )
+            );
         }
     };
     return iter(arr, []);
